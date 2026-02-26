@@ -6,7 +6,9 @@ const app = express()
 
 app.use(cors(
   {
-    origin: ProcessingInstruction.env.CORS_ORIGIN,
+      origin: process.env.CORS_ORIGIN,
+    // origin: ProcessingInstruction.env.CORS_ORIGIN,
+
     credentials:true,
   }
 ))
@@ -17,5 +19,13 @@ app.use(express.urlencoded({extended: true, limit:"16kb"}))  // in website url s
 app.use(express.static("public"))  // public asset save image ,video  , document  etc
 
 
+//routes import
+
+import userRouter from './routes/user.routes.js'
+ 
+// routes declaration
+app.use("/api/v1/users", userRouter)
+
+//http://licalhost:8000/api/v1/users/register
 
 export { app }
