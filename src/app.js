@@ -1,7 +1,8 @@
 import express from "express"
 import cors from "cors"
 import cookieParser  from "cookie-parser"
-const app = express()
+//create server app
+const app = express()   
 
 app.use(cors(
   {
@@ -10,10 +11,10 @@ app.use(cors(
   }
 ))
 
-// middle were inditify (use)
-app.use(express.json({limit:"16kb"})) // give json limit 
-app.use(express.urlencoded({extended: true, limit:"16kb"}))  // in website url something show %20  so it is use to debug or get data
-app.use(express.static("public"))  // public asset save image ,video etc
+// middle were inditify (use)   // middleware that run before routes
+app.use(express.json({limit:"16kb"})) // allow max size json data
+app.use(express.urlencoded({extended: true, limit:"16kb"}))  // in website url something show %20  so it is use to debug or get data using in login forms
+app.use(express.static("public"))  // public asset save image ,video  , document  etc
 
 
 

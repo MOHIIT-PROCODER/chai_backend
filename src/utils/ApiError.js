@@ -6,11 +6,11 @@ class ApiError extends Error{
     stack =  ""
   ){
     super(message)
-    this.statusCode= statusCode
+    this.statusCode= statusCode   // http status (404, 500, 400)
     this.data = null
-    this.message = message
+    this.message = message  // error message
     this.sucess = false;
-    this.errors= errors
+    this.errors= errors    //extra validation error
 
 
     if(stack)
