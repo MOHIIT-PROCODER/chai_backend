@@ -1,6 +1,6 @@
 import {v2 as cloudinary} from "cloudinary"
 import { response } from "express";
-import fs from "fs"
+import fs from "fs";
 
 
 
@@ -21,7 +21,7 @@ const uploadOnCloudinary = async (localFilePath) => {
     const response = await cloudinary.uploader.upload(
       localFilePath,
       {
-        public_id: "shoes",
+        // public_id: "shoes",
         resource_type: "auto",
       }
     );
@@ -30,9 +30,13 @@ const uploadOnCloudinary = async (localFilePath) => {
     return response;
 
   } catch (error) {
-    fs.unlink(localFilePath)// remove local save temp file as the uplord opertionfailed
-    return null
-  }
+    if (localFilePath) {
+        fs.unlinkSync(localFilePath)  //   // remove local save temp file as the uplord opertionfailed
+    }
+    console.log("Upload Error:", error.message)
+    return null;
+}
+
 };
 
 export {uploadOnCloudinary}

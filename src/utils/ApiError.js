@@ -9,7 +9,7 @@ class ApiError extends Error{
     this.statusCode= statusCode   // http status (404, 500, 400)
     this.data = null
     this.message = message  // error message
-    this.sucess = false;
+    this.success = false;
     this.errors= errors    //extra validation error
 
 
