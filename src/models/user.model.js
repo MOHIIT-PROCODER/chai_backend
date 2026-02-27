@@ -56,11 +56,20 @@ const userSchema = new Schema({
   timestamps:true
 })
 
-userSchema.pre("save", async function (next) {
-  if(!this.isModified("password")) return next();   // always not change
+// userSchema.pre("save", async function (next) {
+//   if(!this.isModified("password")) return next();   // always not change
 
-  this.password = await bcrypt.hash(this.password, 10)    //encrypt psd
-  next()
+//   this.password = await bcrypt.hash(this.password, 10)    //encrypt psd
+//   next()
+// })
+
+
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
+
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
 
   userSchema.methods.isPasswordCorrect = async function name(password) {
     return await bcrypt.compare(password, this.password)     // it compre user input pas with encrpt password
@@ -96,7 +105,7 @@ userSchema.pre("save", async function (next) {
       }
     )
   }
-} )
+
 
 
 
